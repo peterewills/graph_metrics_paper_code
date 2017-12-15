@@ -31,43 +31,31 @@ p = (n-m)*m / (n*(n-1)/2) # so that volume of ER and BA graphs match
 
 def distance(dist_func,A,B): return dist_func(A,B)
 
-lambda_adj_1 = lambda A1,A2: nc.lambda_dist(A1,A2,kind='adjacency',k=1)
-lambda_lap_1 = lambda A1,A2: nc.lambda_dist(A1,A2,kind='laplacian',k=1)
-lambda_nlap_1 = lambda A1,A2: nc.lambda_dist(A1,A2,kind='laplacian_norm',k=1)
+k_list = [1,2,5,10,20,50,75,90,99]
 
-lambda_adj_2 = lambda A1,A2: nc.lambda_dist(A1,A2,kind='adjacency',k=2)
-lambda_lap_2 = lambda A1,A2: nc.lambda_dist(A1,A2,kind='laplacian',k=2)
-lambda_nlap_2 = lambda A1,A2: nc.lambda_dist(A1,A2,kind='laplacian_norm',k=2)
+def flatten(l): return [item for sublist in l for item in sublist]
 
-lambda_adj_5 = lambda A1,A2: nc.lambda_dist(A1,A2,kind='adjacency',k=5)
-lambda_lap_5 = lambda A1,A2: nc.lambda_dist(A1,A2,kind='laplacian',k=5)
-lambda_nlap_5 = lambda A1,A2: nc.lambda_dist(A1,A2,kind='laplacian_norm',k=5)
+distances = []
+labels = []
 
-lambda_adj_10 = lambda A1,A2: nc.lambda_dist(A1,A2,kind='adjacency',k=10)
-lambda_lap_10 = lambda A1,A2: nc.lambda_dist(A1,A2,kind='laplacian',k=10)
-lambda_nlap_10 = lambda A1,A2: nc.lambda_dist(A1,A2,kind='laplacian_norm',k=10)
+def return_lambdas(k):
+    return [lambda A1,A2: nc.lambda_dist(A1,A2,kind='adjacency',k=k),
+            lambda A1,A2: nc.lambda_dist(A1,A2,kind='laplacian',k=k),
+            lambda A1,A2: nc.lambda_dist(A1,A2,kind='laplacian_norm',k=k)]
 
-lambda_adj_20 = lambda A1,A2: nc.lambda_dist(A1,A2,kind='adjacency',k=20)
-lambda_lap_20 = lambda A1,A2: nc.lambda_dist(A1,A2,kind='laplacian',k=20)
-lambda_nlap_20 = lambda A1,A2: nc.lambda_dist(A1,A2,kind='laplacian_norm',k=20)
+# can't make this work without using map
+distances = list(map(return_lambdas,k_list))
+distances = flatten(distances)
 
-distances = [lambda_adj_1,lambda_lap_1,lambda_nlap_1,
-             lambda_adj_2,lambda_lap_2,lambda_nlap_2,
-             lambda_adj_5,lambda_lap_5,lambda_nlap_5,
-             lambda_adj_10,lambda_lap_10,lambda_nlap_10,
-             lambda_adj_20,lambda_lap_20,lambda_nlap_20]
+for k in k_list:
 
-labels = ['Lambda (Adjacency, k=1)','Lambda (Laplacian, k=1)',
-          'Lambda (Normalized Laplacian, k=1)',
-          'Lambda (Adjacency, k=2)','Lambda (Laplacian, k=2)',
-          'Lambda (Normalized Laplacian, k=2)',
-          'Lambda (Adjacency, k=5)','Lambda (Laplacian, k=5)',
-          'Lambda (Normalized Laplacian, k=5)',
-          'Lambda (Adjacency, k=10)','Lambda (Laplacian, k=10)',
-          'Lambda (Normalized Laplacian, k=10)',
-          'Lambda (Adjacency, k=20)','Lambda (Laplacian, k=20)',
-          'Lambda (Normalized Laplacian, k=20)']
+    labels_k = ['Lambda (Adjacency, k={})'.format(k),
+                'Lambda (Laplacian, k={})'.format(k),
+                'Lambda (Normalized Laplacian, k={})'.format(k)]
 
+    labels += labels_k
+
+    
 def grab_data(i,null=True):
 
     if i % 100 == 0 : print('Iteration {}.'.format(i))
