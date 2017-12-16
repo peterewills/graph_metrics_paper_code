@@ -48,7 +48,7 @@ labels = ['Edit','Resistance Dist.','DeltaCon','NetSimile',
 
 def grab_data(i,null=True):
 
-    if i % 5 == 0 : print('ER/BA Distance Comparison. Iteration {}.'.format(i))
+    if i % 100 == 0 : print('RDDS/PA Distance Comparison. Iteration {}.'.format(i))
     # load pre-built graphs
     graph_dict = pickle.load(open(
         os.path.join(data_dir,'graphs/graph_{:03d}.p'.format(i)),'rb'))

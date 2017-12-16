@@ -121,11 +121,11 @@ data_dict = {'n' : n,
              This dataset compares lambda k distances for various k."""}
 
 # Ensure we don't inadvertently overwrite an extant file
-file_name = 'lattice_vs_randDS_lambda_k.p'
+file_name = 'lattice_vs_randDS_lambda_k_{}x{}.p'.format(N,M)
 path = os.path.join(data_dir,file_name)
 tag = 1
 while os.path.isfile(path):
-    file_name = 'lattice_vs_randDS_lambda_k_{:02d}.p'.format(tag)
+    file_name = 'lattice_vs_randDS_lambda_k_{}x{}_{:02d}.p'.format(N,M,tag)
     path = os.path.join(data_dir,file_name)
     tag += 1
 

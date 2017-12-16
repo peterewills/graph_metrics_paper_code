@@ -50,10 +50,7 @@ labels = ['Edit','Resistance Dist.','DeltaCon','NetSimile',
 def grab_data(i,null=True):
 
     
-    if i % 100 == 0 :
-        if null : print('Null Data')
-        else : print('Alternative Data')
-        print('Iteration {}.'.format(i))
+    if i % 100 == 0 : print('Lattice Distance Comparison, Iteration {}.'.format(i))
     
     G1 = nx.random_degree_sequence_graph(deg_seq)
     if null:
@@ -112,11 +109,11 @@ data_dict = {'n' : n,
              degree sequence."""}
 
 # Ensure we don't inadvertently overwrite an extant file
-file_name = 'lattice_vs_randDS.p'
+file_name = 'lattice_vs_randDS_{}x{}.p'.format(N,M)
 path = os.path.join(data_dir,file_name)
 tag = 1
 while os.path.isfile(path):
-    file_name = 'lattice_vs_randDS_{:02d}.p'.format(tag)
+    file_name = 'lattice_vs_randDS_{}x{}_{:02d}.p'.format(N,M,tag)
     path = os.path.join(data_dir,file_name)
     tag += 1
 
