@@ -32,7 +32,7 @@ num_cores = multiprocessing.cpu_count()
 # size of ensemble
 ensemble_len = 500
 
-k = 4
+l = 4 # usually denoted k, but we already use k
 n = 100
 p = 0.0404
 beta = 0.1
@@ -77,7 +77,7 @@ def grab_data(i,null=True):
     if null:
         G2 = nx.erdos_renyi_graph(n,p)
     else:
-        G2 = nx.connected_watts_strogatz_graph(n,k,beta)
+        G2 = nx.connected_watts_strogatz_graph(n,l,beta)
     A1,A2 = [nx.adjacency_matrix(G).todense() for G in [G1,G2]]
     A1,A2 = [shuffle_vertex_labels(A) for A in [A1,A2]]
     adj_distances = pd.Series([distance(dfun,A1,A2) for dfun in distances],
