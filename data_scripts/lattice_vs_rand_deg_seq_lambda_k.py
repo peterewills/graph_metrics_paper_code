@@ -34,9 +34,10 @@ deg_seq = [item[1] for item in G.degree_iter()]
 
 def distance(dist_func,A,B): return dist_func(A,B)
 
-k_list = [1,2,3,4,5,10,20,50,75,90,99]
+k_list = range(1,100)
 
-def flatten(l): return [item for sublist in l for item in sublist]
+def flatten(l):
+    return [item for sublist in l for item in sublist]
 
 distances = []
 labels = []
