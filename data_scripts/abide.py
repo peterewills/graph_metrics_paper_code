@@ -3,7 +3,7 @@
 
 import netcomp as nc
 data_dir = "../pickled_data"
-input_data_dir = "../autism_abide"
+input_data_dir = "../data"
 
 from joblib import Parallel, delayed  
 import multiprocessing
