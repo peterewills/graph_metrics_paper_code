@@ -105,11 +105,12 @@ def grab_data(i,null=True):
 
 abide_data = scipy.io.loadmat(os.path.join(input_data_dir,'abide_connectivity.mat'))
 correlations = np.abs(abide_data['correlation'])
-diagnoses = abide_data['diagnosis'] - 1
-diagnoses = [bool(item) for item in diagnoses.flatten()]
+ASD_mask = (abide_data['diagnosis'] - 1).flatten()
+TD_mask = [bool(item) for item in 1-ASD_mask]
+ASD_mask = [bool(item) for item in ASD_mask]
 
-ASD_brains = list(correlations[diagnoses,:,:])
-TD_brains = list(correlations[[~item for item in diagnoses],:,:])
+ASD_brains = list(correlations[ASD_mask,:,:])
+TD_brains = list(correlations[TD_mask,:,:])
 
 
 ####################################
