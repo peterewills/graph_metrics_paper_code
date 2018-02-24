@@ -47,11 +47,11 @@ def distance(dist_func,A,B): return dist_func(A,B)
 lambda_adj = lambda A1,A2: nc.lambda_dist(A1,A2,kind='adjacency')
 lambda_lap = lambda A1,A2: nc.lambda_dist(A1,A2,kind='laplacian')
 lambda_nlap = lambda A1,A2: nc.lambda_dist(A1,A2,kind='laplacian_norm')
-res_dist = lambda A1,A2: nc.resistance_distance(A1,A2,check_connected=False)
+res_dist = lambda A1,A2: nc.resistance_distance(A1,A2,renormalized=True)
 
 distances = [nc.edit_distance,res_dist,nc.deltacon0,nc.netsimile,
             lambda_adj,lambda_lap,lambda_nlap]
-labels = ['Edit','Resistance Dist.','DeltaCon','NetSimile',
+labels = ['Edit','Resistance Dist. (Renormalized)','DeltaCon','NetSimile',
           'Lambda (Adjacency)','Lambda (Laplacian)','Lambda (Normalized'
           ' Laplacian)']
 
