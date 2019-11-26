@@ -10,6 +10,7 @@ netcomp = "*"
 joblib = "*"
 networkx = "*"
 pandas = "*"
+tqdm = "*"
 
 [dev-packages]
 
